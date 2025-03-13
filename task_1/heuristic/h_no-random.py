@@ -1,14 +1,23 @@
+# ahora, primero se ordenan de mayor a menor, donde mayor es el que cubre más comunas. Luego se va en orden identificando.
+# PROBLEMA: los que tienen igual cantidad de comunas, hace que no se ordene con efectividad
+# solución: 1) probar otro orden, sigue siendo mayor a menor pero cambiado los iguales
+# solución: 2) buscar otra forma de ordenar y tener una lógica para ir viendo.
+# duda: ¿para la pt.2 del backtracking es necesario literalmente crear Arbol?
+
 import random
 
 def select_communes(region):
+    # Ordenar las comunas por tamaño de mayor a menor
+    sorted_region = sorted(enumerate(region), key=lambda x: len(x[1]), reverse=True)
     selected_indexes = []
     covered = set()
     
-    while len(covered) < 15:
-        remaining = [i for i in range(len(region)) if i not in selected_indexes]
-        choice = random.choice(remaining)
-        selected_indexes.append(choice)
-        covered.update(region[choice])
+    for index, communes in sorted_region:
+        if len(covered) >= 15:
+            break
+        if index not in selected_indexes:
+            selected_indexes.append(index)
+            covered.update(communes)
     
     return selected_indexes, covered
 
