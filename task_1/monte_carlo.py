@@ -1,6 +1,11 @@
-import random
+"""
+Selecciona comunas al azar hasta cubrir todas las comunas necesarias.
+Se repite muchas veces (10,000 iteraciones en este caso) y guarda la mejor solución encontrada.
+No garantiza encontrar la solución óptima, pero puede encontrar una solución cercana en menos tiempo.
+Es útil cuando el espacio de búsqueda es demasiado grande para el backtracking.
+"""
 
-# por ahora elige comunas al azar
+import random
 
 def select_communes(region):
     selected_indexes = []
